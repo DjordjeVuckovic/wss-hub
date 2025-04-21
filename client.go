@@ -32,7 +32,10 @@ func (c *Client) writeMessage() {
 			return
 		}
 
-		c.Conn.WriteJSON(message)
+		err := c.Conn.WriteJSON(message)
+		if err != nil {
+			return
+		}
 	}
 }
 
@@ -51,7 +54,7 @@ func (c *Client) readMessage(hub *Hub) {
 				websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
-			break
+			return
 		}
 
 		msg := &Message{

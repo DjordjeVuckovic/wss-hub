@@ -46,7 +46,7 @@ func (h *Hub) Run() {
 		Name:    "room 123",
 		Clients: make(map[string]*Client),
 	}
-	h.Rooms["123"] = &r
+	h.Rooms[r.ID] = &r
 	for {
 		select {
 		case cl := <-h.Register:
